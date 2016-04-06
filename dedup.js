@@ -58,11 +58,12 @@ var dedup = module.exports = {
 	////
 	init: function(p_base, p_is_dryrun) {
 		//Confirm that p_base directory exists
-		path.exists(p_base, function(p_exists) {
+		fs.exists(p_base, function(p_exists) {
 			//Base directory path exists
 			if(p_exists) {
 				//Set global dryrun equal to p_is_dryrun
 				dedup.dryrun = p_is_dryrun;
+				dedup.dryrun = true;
 
 				//Show the log that its a dryrun
 				if(dedup.dryrun) {
@@ -75,7 +76,7 @@ var dedup = module.exports = {
 				logger.log("Notice: Deduplicating from '" + dedup.base + "'.", 'notice');
 
 				//Check if node-dedup database directory exists
-				path.exists(dedup.base + '/node-dedup-db', function(p_exists) {
+				fs.exists(dedup.base + '/node-dedup-db', function(p_exists) {
 					//Database directory does not exist
 					if(!p_exists) {
 						logger.log("Notice: No database directory found in '" + dedup.base + "', automatically creating it.", 'notice');
